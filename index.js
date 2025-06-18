@@ -1,5 +1,5 @@
-async function fetch_users() {
-    const data =
+async function fetch_users(fetch_type = 'all') {
+    const fetch_data = await
         fetch("https://dan-collins-dev.github.io/dummy-data-fetching-repo/data/users.json")
         .then(response => {
                 if (!response.ok) {
@@ -8,38 +8,15 @@ async function fetch_users() {
                 // console.log("Response status:", response.status);
                 return response.json();
             });
-    return data;
+    
+    // If fetch_type is 'all', return all users, otherwise return users with less than 10 years employed
+    const user_data = 
+        (fetch_type === 'all' 
+                ? fetch_data 
+                : fetch_data.filter(user => user.yearsEmployed < 10)
+        );        
+    create_user_cards(user_data);
 };
-
-
-// Function to fetch all users and display them in user cards on the page
-async function get_all_users() {
-    try {
-        const users_all = await fetch_users();
-        create_user_cards(users_all);
-    }
-    catch (error) {
-        const error_message = document.getElementById('error-message');
-        error_message.innerHTML = `"Error fetching user data: ", error`;
-        throw error;
-    }
-}
-
-
-// Function to fetch all users, filter for those with less than 10 years employed
-//  and display them in user cards on the page
-async function get_under_10_years() {
-    try {
-        const users_all = await fetch_users();
-        const users_under_10 = users_all.filter(user => user.yearsEmployed < 2);
-        create_user_cards(users_under_10);
-    }
-    catch (error) {
-        const error_message = document.getElementById('error-message');
-        error_message.innerHTML = `"Error fetching user data: ", error`;
-        throw error;
-    }
-}
 
 
 // Function to reset the user cards by not passing any data into the create_user_cards function
