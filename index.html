@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Basic Fetch Practice</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="index.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <h1>Users</h1>
+            <div class="request-buttons">
+                <button id="get-all-users" onclick="get_all_users();" >Get All Users</button>
+                <button id="get-under-10-years" onclick="get_under_10_years();">Get Users Under 10 Years Experience</button>
+                <button id="reset" onclick="reset_user_cards();">Reset</button>
+            </div>
+        </header>
+        <main>
+            <div class="error-message" id="error-message">
+                Error: Unable to fetch data. Please try again later.
+                <!-- Error messages will be displayed here -->
+            </div>
+            <div class="user-list" id="user-list">
+                <!-- User cards will be dynamically inserted here -->
+            </div>
+        </main>
+    </body>
+</html>
